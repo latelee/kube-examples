@@ -8,6 +8,8 @@ import (
 )
 
 func TurnON(pinNumber int64) {
+glog.Info("TurnON pin: ", pinNumber)
+return
 	pin := rpio.Pin(pinNumber)
 	// Open and map memory to access gpio, check for errors
 	if err := rpio.Open(); err != nil {
@@ -22,9 +24,12 @@ func TurnON(pinNumber int64) {
 	pin.Output()
 
 	pin.High()
+
 }
 
 func TurnOff(pinNumber int64) {
+glog.Info("TurnOff pin: ", pinNumber)
+return
 	pin := rpio.Pin(pinNumber)
 	// Open and map memory to access gpio, check for errors
 	if err := rpio.Open(); err != nil {

@@ -16,4 +16,4 @@ spec:
     type:
       int:
         accessMode: ReadOnly
-        defaultValue: 18
+        defaultValue: 168

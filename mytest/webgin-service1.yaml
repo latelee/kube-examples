@@ -1,0 +1,47 @@
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: webgin-deployment
+  labels:
+   app: webgin
+spec:
+  replicas: 3 # tells deployment to run 3 pods matching the template
+  selector:
+    matchLabels:
+      app: webgin
+  template:
+    metadata:
+      labels:
+        app: webgin
+    spec:
+      containers:
+      - name: webgin
+        image: latelee/webgin
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - mountPath: /etc/localtime
+          name: time-zone
+      volumes:
+      - name: time-zone
+        hostPath: 
+          path: /etc/localtime
+
+---
+
+apiVersion: v1
+kind: Service # 指定为service
+metadata:
+  labels:
+    run: webgin
+  name: webgin
+  namespace: default
+spec:
+  ports:
+  - port: 88 # 对外为88端口
+    targetPort: 80
+    nodePort: 30800 # 指定节点主机的端口为30800
+  selector:
+    app: webgin
+  type: NodePort

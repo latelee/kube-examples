@@ -12,11 +12,12 @@ spec:
       labels:
         app: led-light-mapper
     spec:
+      nodeName: latelee.org.ttucon-2142ec #edge-node2
       hostNetwork: true
       containers:
       - name: led-light-mapper-container
-        image: <your_dockerhub_username>/led-light-mapper:v1.1
-        imagePullPolicy: Always
+        image: latelee/led-light-mapper:v1.1
+        imagePullPolicy: IfNotPresent
         securityContext:
           privileged: true
         volumeMounts:
@@ -25,5 +26,6 @@ spec:
       volumes:
       - name: config-volume
         configMap:
-          name: device-profile-config-<edge_node_name>
+          name: device-profile-config-edge-node2
       restartPolicy: Always
+

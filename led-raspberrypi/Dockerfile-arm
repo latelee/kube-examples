@@ -1,4 +1,4 @@
-FROM latelee/busybox:go
+FROM latelee/armbusybox:go
 
 CMD mkdir -p light_mapper
 
